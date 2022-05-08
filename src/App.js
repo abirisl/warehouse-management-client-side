@@ -7,10 +7,11 @@ import Footer from './component/Footer/Footer';
 import Login from './component/Login/Login';
 import Register from './component/Register/Register';
 import ContactUs from './component/ContactUs/ContactUs';
+import Blogs from './component/Blogs/Blogs';
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <Header></Header>
         <Routes>
           <Route path='/' element={<Home></Home>}></Route>
@@ -19,6 +20,7 @@ function App() {
           <Route path='/login' element={<Login></Login>}></Route>
           <Route path='/register' element={<Register></Register>}></Route>
           <Route path='/contactUs' element={<ContactUs></ContactUs>}></Route>
+          <Route path='/blogs' element={<Blogs></Blogs>}></Route>
         </Routes>
         <Footer></Footer>
     </div>
