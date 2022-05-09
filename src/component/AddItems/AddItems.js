@@ -34,6 +34,9 @@ const AddItems = () => {
                             <Form.Group className="mb-3" controlId="formGroupEmail">
                                 <Form.Control type="number" placeholder="Price"  {...register("price")}/>
                             </Form.Group>
+                            <Form.Group className="mb-3" controlId="formGroupEmail">
+                                <Form.Control type="number" placeholder="Quantity"  {...register("quantity")}/>
+                            </Form.Group>
                             <Form.Group className="mb-3" controlId="formGroupPassword">
                                 <Form.Control type="text" placeholder="Description" {...register("description")}/>
                             </Form.Group>
