@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { signOut } from 'firebase/auth';
 import auth from '../../firebase.init';
-import logo from '../../images/logo/logo.png'
+import logo from '../../images/logo/logo.png';
 
 const Header = () => {
     const [user] = useAuthState(auth);
@@ -39,6 +39,17 @@ const Header = () => {
                             <Nav.Link as={Link} to='/contactUs'>Contact us</Nav.Link>
                             <Nav.Link as={Link} to='/blogs'>Blogs</Nav.Link>
                             {
+                                user &&
+                               <Nav.Link as={Link} to='/addItems'>Add Items</Nav.Link> 
+
+                            }
+                            {
+                                user && <Nav.Link as={Link} to='/manageinventory'>Manage Inventory</Nav.Link>
+                            }
+                            {
+                                user && <Nav.Link as={Link} to='/myitems'>My Items</Nav.Link>
+                            }
+                            {
                                user? 
                                <button className='btn btn-link text-dark text-decoration-none' onClick={handleSignOut}>sign out</button>
                                :
@@ -46,6 +57,10 @@ const Header = () => {
                               Login
                              </Nav.Link>
                             }
+                            {
+                                user && <Nav.Link as={Link} to=''>{user.email.slice(0,10)}</Nav.Link>
+                            }
+                            
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

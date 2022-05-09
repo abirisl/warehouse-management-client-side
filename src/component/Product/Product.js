@@ -1,8 +1,15 @@
 import React from 'react';
 import { Button, Card, CardGroup, Col } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const Product = ({ card }) => {
-    const { name, img, price, description } = card
+    const { id, name, img, price, description } = card;
+
+    const navigate = useNavigate();
+
+    const navigatorServiceDetail = id =>{
+        navigate(`/product/${id}`);
+    }
 
     return (
         <CardGroup>
@@ -13,9 +20,9 @@ const Product = ({ card }) => {
                     <Card.Title className='text-success'>{name}</Card.Title>
                     <h5>price: ${price}</h5>
                     <Card.Text>
-                        {description.slice(0,150) + '.......'}
+                        {description}
                     </Card.Text>
-                    <Button>Update</Button>
+                    <Button onClick= {() => navigatorServiceDetail(id)}>Update</Button>
                 </Card.Body>
             </Card>
             </Col>
