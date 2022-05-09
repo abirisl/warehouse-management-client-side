@@ -35,7 +35,6 @@ const Header = () => {
                             navbarScroll
                         >
                             <Nav.Link as={Link} to='/home'>Home</Nav.Link>
-                            <Nav.Link as={Link} to='/about'>About</Nav.Link>
                             <Nav.Link as={Link} to='/contactUs'>Contact us</Nav.Link>
                             <Nav.Link as={Link} to='/blogs'>Blogs</Nav.Link>
                             {
@@ -58,7 +57,7 @@ const Header = () => {
                              </Nav.Link>
                             }
                             {
-                                user && <Nav.Link as={Link} to=''>{user.email.slice(0,10)}</Nav.Link>
+                                user  && <Nav.Link as={Link} to=''>{user.email.slice(0,10)}</Nav.Link>
                             }
                             
                         </Nav>

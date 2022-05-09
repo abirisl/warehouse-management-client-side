@@ -6,10 +6,10 @@ import useProduct from '../../Hooks/useProduct';
 
 const Products = () => {
 
-    const [products,setProducts] = useProduct();
+    const [products] = useProduct();
     return (
         <div className='p-5 text-center'>
-            <Row xs={1} md={3} className="g-4">
+            <Row xs={1} md={3} className="g-4 p-3 ">
             {
                 products.map(product => <Product key={product._id} card= {product}></Product>)
             }

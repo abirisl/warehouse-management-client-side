@@ -36,6 +36,7 @@ const Login = () => {
     }
     if (user) {
         navigate('/home')
+        
     }
     if(user2){
         navigate('/home')
