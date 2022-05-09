@@ -11,7 +11,7 @@ const Footer = () => {
     const today = new Date();
     const year = today.getFullYear(); 
     return (
-        <div className='bg-dark text-white pb-4'>
+        <div className='bg-dark text-white pb-4 text-center'>
             
             <div className=' d-flex p-4'>
             <Row xs={1} md={4}>
@@ -70,7 +70,7 @@ const Footer = () => {
               </div>
             
               <hr/>
-                <div>
+                <div className='text-center'>
                 <p>Copyright @{year} All rights reserved by: <span className='text-warning'>The Providers</span></p>
                 </div>
             </div>

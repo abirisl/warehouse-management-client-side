@@ -13,7 +13,7 @@ const Products = () => {
         .then(data => setProducts(data))
     })
     return (
-        <div className='p-5'>
+        <div className='p-5 text-center'>
             <Row xs={1} md={3} className="g-4">
             {
                 products.map(product => <Product key={product.id} card= {product}></Product>)
