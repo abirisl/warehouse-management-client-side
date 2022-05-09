@@ -1,10 +1,13 @@
 import React from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
 
 
 const AddItems = () => {
     const { register, handleSubmit } = useForm();
+    const [user] = useAuthState(auth);
 
      const onSubmit = data => {
         console.log(data);
@@ -30,6 +33,9 @@ const AddItems = () => {
                         <Form onSubmit={handleSubmit(onSubmit)}>
                             <Form.Group className="mb-3" controlId="formGroupEmail">
                                 <Form.Control type="text" placeholder="Product name" {...register("name", { required: true, maxLength: 20 })}/>
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="formGroupEmail">
+                                <Form.Control type="email" placeholder="your email" value={user?.email} {...register("email", { required: true, maxLength: 20 })}/>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formGroupEmail">
                                 <Form.Control type="number" placeholder="Price"  {...register("price")}/>
