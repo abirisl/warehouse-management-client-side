@@ -9,7 +9,7 @@ const ManageInventory = () => {
     const handleDelete = id => {
         const proceed = window.confirm('Are you sure');
         if (proceed) {
-            const url = `http://localhost:5000/product/${id}`;
+            const url = `https://salty-reef-38421.herokuapp.com/product/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })
@@ -23,38 +23,40 @@ const ManageInventory = () => {
 
         }
     }
-    
+
     const navigate = useNavigate();
 
-    const navigatorServiceDetail = id =>{
+    const navigatorServiceDetail = id => {
         navigate('/additems');
     }
     return (
-            <Table striped bordered hover variant="dark">
-        <thead>
-          <tr>
-          <th>Product Name</th>
-                <th>Price</th>
-                <th>Image</th>
-                <th>Quantity</th>
-                <th>Delete</th>
-          </tr>
-        </thead>
-        {
-            products.map(product =>
-                <tbody key={product._id}>
+        <Table striped bordered hover variant="dark" className='w-100'>
+                <thead>
                     <tr>
-                        <td>{product.name}</td>
-                        <td>{product.price}</td>
-                        <td><img style={{ height: '50px', width: '50px' }} className='ms-3' src={product.img} alt="" /></td>
-                        <td>{product.quantity}</td>
-                        <td><button className='w-100 bg-success text-white' onClick={() => handleDelete(product._id)}>Delete</button></td>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Image</th>
+                        <th>Quantity</th>
+                        <th>Delete</th>
                     </tr>
-                </tbody>
-            )
-}
-<button className='mt-4 w-50 btn btn-link text-decoration-none fw-bold' style={{marginLeft:'400px'}} onClick= {() => navigatorServiceDetail()}>Add Product</button>
-      </Table>
+                </thead>
+               
+                {
+                    products.map(product =>
+                        <tbody key={product._id}>
+                            <tr>
+                                <td>{product.name}</td>
+                                <td>{product.price}</td>
+                                <td><img style={{ height: '50px', width: '50px' }} className='ms-3' src={product.img} alt="" /></td>
+                                <td>{product.quantity}</td>
+                                <td><button className='w-100 bg-success text-white' onClick={() => handleDelete(product._id)}>Delete</button></td>
+                            </tr>
+                        </tbody>
+                    )
+                }
+                <button className='mt-4 w-50 btn btn-link text-decoration-none fw-bold' style={{ marginLeft: '200px' }} onClick={() => navigatorServiceDetail()}>Add Product</button>
+                
+        </Table>
     );
 };
 

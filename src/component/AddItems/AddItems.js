@@ -1,17 +1,14 @@
 import React from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
-import { useAuthState } from 'react-firebase-hooks/auth';
-import auth from '../../firebase.init';
 
 
 const AddItems = () => {
-    const { register, handleSubmit } = useForm();
-    const [user] = useAuthState(auth);
+    const { register, handleSubmit, reset } = useForm();
 
      const onSubmit = data => {
         console.log(data);
-        const url = `http://localhost:5000/product`;
+        const url = `https://salty-reef-38421.herokuapp.com/product/`;
         fetch(url, {
             method: 'POST',
             headers: {
@@ -20,9 +17,11 @@ const AddItems = () => {
             body: JSON.stringify(data)
    
         })
-        .then(res => res.json())
-        .then(result => result)
-   
+        .then(res=>res.json())
+            .then(result => {
+            console.log(result);
+              reset()
+        })
      };
     return (
         <>
@@ -35,7 +34,7 @@ const AddItems = () => {
                                 <Form.Control type="text" placeholder="Product name" {...register("name", { required: true, maxLength: 20 })}/>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formGroupEmail">
-                                <Form.Control type="email" placeholder="your email" value={user?.email} {...register("email", { required: true, maxLength: 20 })}/>
+                                <Form.Control type="text" placeholder="Suplier name" {...register("name", { required: true, maxLength: 20 })}/>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formGroupEmail">
                                 <Form.Control type="number" placeholder="Price"  {...register("price")}/>

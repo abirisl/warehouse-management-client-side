@@ -3,6 +3,7 @@
         "id": 1,
         "img": "https://i.ibb.co/N1n7gdb/bike1.jpg",
         "name": "FZ25",
+        "suplierName": "Yamaha",
         "price": "4,00000",
         "quantity": "50",
         "description": "The all-new bike has been developed with a newly designed air-cooled, 249 cc, 4-stroke, SOHC, 2-valve, single-cylinder, high-torque fuel-injected engine on a lightweight frame (152 Kgs) enabling the joy of control as the rider intends."
@@ -11,6 +12,7 @@
         "id": 2,
         "img": "https://i.ibb.co/pX0dMWg/bike2.png",
         "name": "Black Yamaha YZF R15",
+        "suplierName": "Yamaha",
         "price": "4,80000",
         "quantity": "80",
         "description": "The original supersport is back! Born of Yamaha’s racing DNA that shaped legends like M1, The R1 and the R-series, the all-new YZF R15 powered with Dual Channel ABS is max powerhouse of 18.6 PS that brings track experience to the streets."
@@ -19,6 +21,7 @@
         "id": 3,
         "img": "https://i.ibb.co/hM9Zfbt/bike3.jpg",
         "name": " Royal Enfield 650",
+        "suplierName": "Yamaha",
         "price": "3,50000",
         "quantity": "35",
         "description": "The Royal Enfield 650 twins yet again lead the sales in the performance bike segment and in February 2022 they registered sales of 2469 units combined."
@@ -27,6 +30,7 @@
         "id": 4,
         "img": "https://i.ibb.co/MM4Jdrr/bike4.png",
         "name": "Yamaha YZF R1",
+        "suplierName": "Yamaha",
         "price": "3,80000",
         "quantity": "75",
         "description": "Yamaha is the leading manufacturer of motorcycles, scooters, fishing boats, utility boats and a host of other motorized products. Yamaha, the manufacturer of the finest 4-stroke motorcycles in the world, has an exquisite range of bikes on offer. "
@@ -35,6 +39,7 @@
         "id": 5,
         "img": "https://i.ibb.co/PZJbz8B/bike5.jpg",
         "name": "Yamaha VMAX ",
+        "suplierName": "Yamaha",
         "price": "4,50000",
         "quantity": "80",
         "description": "VMax is Yamaha’s legendary power-cruiser with a 1,679cc V4 engine producing 200.1 PS of power and 166.8 Nm of torque. It is a performance cruiser, with and intimidating look. "
@@ -43,6 +48,7 @@
         "id": 6,
         "img": "https://i.ibb.co/g9c8wGH/bike6.jpg",
         "name": "Yamaha YZF R1",
+        "suplierName": "Yamaha",
         "price": "5,00000",
         "quantity": "50",
         "description": "The Yamaha YZF R1 was manufactured by Yamaha automobile company from 1998 to the present. It is a super sports bike. In 1998-1999, the YZF-R1 was launched with a redesigned compact Genesis engine that appears like a stacked gearbox."

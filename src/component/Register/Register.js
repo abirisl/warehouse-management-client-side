@@ -105,8 +105,8 @@ const Register = () => {
                     {errorElement}
                     <div className='d-flex p-2 ms-3'>
                     <div><img height={50} src={facebook} className='ms-5' alt="" /></div>
-                    <div><img height={50} src={google} className='ms-5' alt="" /></div>
-                    <div><img height={50} src={github} className='ms-5' alt="" /></div>
+                    <div onClick={() => signInWithGoogle()}><img height={50} src={google} className='ms-5' alt="" /></div>
+                    <div onClick={() => signInWithGithub()}><img height={50} src={github} className='ms-5' alt="" /></div>
                     </div>
                 </Col>
             </Row>

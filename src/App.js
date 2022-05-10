@@ -11,6 +11,7 @@ import Blogs from './component/Blogs/Blogs';
 import Information from './component/Information/Information';
 import AddItems from './component/AddItems/AddItems';
 import ManageInventory from './component/ManageInventory/ManageInventory';
+import MyItem from './component/MyItem/MyItem';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path='/product/:id' element={<Information></Information>}></Route>
           <Route path='/additems' element={<AddItems></AddItems>}></Route>
           <Route path='/manageinventory' element={<ManageInventory></ManageInventory>}></Route>
+          <Route path='/myItems' element={<MyItem></MyItem>}></Route>
         </Routes>
         <Footer></Footer>
     </div>

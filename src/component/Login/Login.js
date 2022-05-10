@@ -7,6 +7,7 @@ import facebook from '../../images/auth-img/facebook.png';
 import google from '../../images/auth-img/google.png';
 import github from '../../images/auth-img/github.png';
 import Loading from '../Loading/Loading';
+import axios from 'axios';
 
 const Login = () => {
     const [email,setEmail] = useState('');
@@ -34,10 +35,11 @@ const Login = () => {
         await sendPasswordResetEmail(email);
           alert('Sent email');
     }
+    let from = location.state?.from?.pathname || "/home";
+
     if (user) {
-        navigate('/home')
-        
-    }
+        //   navigate(from, { replace: true });
+        }
     if(user2){
         navigate('/home')
     }
@@ -51,19 +53,20 @@ const Login = () => {
        return <Loading></Loading>
     }
 
-    const handleSignIn = event =>{
+    const handleSignIn = async event =>{
         event.preventDefault()
         if(!user){
             setError('Please create an register')
         }
-        signInWithEmailAndPassword(email, password)
+        await signInWithEmailAndPassword(email, password);
+        const {data} = await axios.post('https://salty-reef-38421.herokuapp.com/login', {email});
+        console.log(data)
+        localStorage.setItem('accessToken', data.accessToken)
+        navigate(from, { replace: true });
         
     }
-    let from = location.state?.from?.pathname || "/home";
-
-    if (user) {
-      navigate(from, { replace: true });
-    }
+    
+    
     return (
         <>
             <Container>
@@ -88,7 +91,7 @@ const Login = () => {
                                 <small>New to Company?</small> <Link to='/register'>Create a new Account</Link>
                             </p>
                             <p>
-                                <small>Forget Password? </small><Link to='register'>reset password</Link>
+                                <small>Forget Password? </small><Link to='register' onClick={resetPassword}>reset password</Link>
                             </p>
                             <p className='text-danger'>{error}</p>
                         </div>
