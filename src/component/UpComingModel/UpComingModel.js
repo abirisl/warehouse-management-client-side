@@ -13,7 +13,7 @@ const UpComingModel = () => {
             <h1 className='text-uppercase text-center text-success fw-bold mt-5'>UpComing Model</h1>
             <hr className='w-25 mx-auto fw-bold'/>
                 <div className='d-flex mt-3 mb-3' >
-                <Row sm={12} md={4}>
+                <Row sm={12} md={4} className='mx-auto'>
             <Col>
             <div className='shadow-lg w-50'>
                 <img src={coming1} alt="" />

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
-import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGithub, useSignInWithGoogle  } from 'react-firebase-hooks/auth';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
-import { Link,  useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import facebook from '../../images/auth-img/facebook.png';
 import google from '../../images/auth-img/google.png';
 import github from '../../images/auth-img/github.png';
@@ -10,63 +10,72 @@ import Loading from '../Loading/Loading';
 import axios from 'axios';
 
 const Login = () => {
-    const [email,setEmail] = useState('');
-    const [password,setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const location = useLocation();
-   
+
     const [
         signInWithEmailAndPassword,
-        user,loading
-      ] = useSignInWithEmailAndPassword(auth);
-      const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
+        user, loading
+    ] = useSignInWithEmailAndPassword(auth);
+    const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
     const [signInWithGoogle, user2, error2] = useSignInWithGoogle(auth);
     const [signInWithGithub, error3] = useSignInWithGithub(auth);
-    
+
     let errorMessage;
-    const handleEmailBlur = event =>{
+    const handleEmailBlur = event => {
         setEmail(event.target.value)
     }
-    const handlePasswordBlur = event =>{
+    const handlePasswordBlur = event => {
         setPassword(event.target.value)
     }
-    const resetPassword =async () =>{
+    const resetPassword = async () => {
         await sendPasswordResetEmail(email);
-          alert('Sent email');
+        alert('Sent email');
     }
     let from = location.state?.from?.pathname || "/home";
 
     if (user) {
         //   navigate(from, { replace: true });
-        }
-    if(user2){
+    }
+    if (user2) {
         navigate('/home')
     }
-    if(error2){
-        errorMessage= <p className='text-danger'>{error2?.message}</p>
+    if (error2) {
+        errorMessage = <p className='text-danger'>{error2?.message}</p>
     }
-    if(error3){
-        errorMessage= <p className='text-danger'>{error3?.message}</p>
+    if (error3) {
+        errorMessage = <p className='text-danger'>{error3?.message}</p>
     }
-    if(loading){
-       return <Loading></Loading>
+    if (loading) {
+        return <Loading></Loading>
     }
 
-    const handleSignIn = async event =>{
+    const handleSignIn = async event => {
         event.preventDefault()
-        if(!user){
+    
+        if (!user) {
             setError('Please create an register')
         }
-        await signInWithEmailAndPassword(email, password);
-        const {data} = await axios.post('https://salty-reef-38421.herokuapp.com/login', {email});
-        console.log(data)
-        localStorage.setItem('accessToken', data.accessToken)
-        navigate(from, { replace: true });
-        
+        signInWithEmailAndPassword(email,password)
+        fetch('http://localhost:5000/login', {
+            method: 'POST',
+            body: JSON.stringify({
+                email: user?.email
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+            .then((response) => response.json())
+            .then((json) => console.log(json));
+
+            navigate(from, { replace: true });
     }
-    
-    
+
+
     return (
         <>
             <Container>
@@ -76,11 +85,11 @@ const Login = () => {
                         <Form onSubmit={handleSignIn}>
                             <Form.Group className="mb-3" controlId="formGroupEmail">
                                 <Form.Label>Email address</Form.Label>
-                                <Form.Control onBlur={handleEmailBlur} type="email" placeholder="Enter email" required/>
+                                <Form.Control onBlur={handleEmailBlur} type="email" placeholder="Enter email" required />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formGroupPassword">
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control onBlur={handlePasswordBlur} type="password" placeholder="Password" required/>
+                                <Form.Control onBlur={handlePasswordBlur} type="password" placeholder="Password" required />
                             </Form.Group>
                             <Button className='w-100' variant="primary" type="submit">
                                 Login
@@ -102,9 +111,9 @@ const Login = () => {
                         </div>
                         {errorMessage}
                         <div className='d-flex p-2 ms-3'>
-                        <div><img height={50} src={facebook} className='ms-5' alt="" /></div>
-                        <div onClick={() => signInWithGoogle()}><img height={50} src={google} className='ms-5' alt="" /></div>
-                        <div onClick={() => signInWithGithub()}><img height={50} src={github} className='ms-5' alt="" /></div>
+                            <div><img height={50} src={facebook} className='ms-5' alt="" /></div>
+                            <div onClick={() => signInWithGoogle()}><img height={50} src={google} className='ms-5' alt="" /></div>
+                            <div onClick={() => signInWithGithub()}><img height={50} src={github} className='ms-5' alt="" /></div>
                         </div>
                     </Col>
                 </Row>

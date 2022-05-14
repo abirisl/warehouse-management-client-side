@@ -1,18 +1,20 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button, Card, CardGroup, Col } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 
-
 const Information = () => {
    const {id} = useParams();
     const [product, setProduct] = useState({});
-
     useEffect(() =>{
-        const url = `https://salty-reef-38421.herokuapp.com/product/${id}`;
+        const url = `http://localhost:5000/product/${id}`;
         fetch(url)
         .then(res => res.json())
         .then(data => setProduct(data))
-    }, [])
+    }, [product,id])
+
+    
+
     return (
         <CardGroup  className='p-5 shadow-lg rounded-lg mt-3 m-5 bg-light'>
             <Col md={6} sm={12}>
@@ -25,17 +27,17 @@ const Information = () => {
                     <Card.Text>
                         {product.description}
                     </Card.Text>
-                    <Button className='bg-warning'>Delivered</Button>
+                    <Button onClick={handleDelivered} className='bg-warning'>Delivered</Button>
                 </Card.Body>
             </Card>
             </Col>
             <Col md={6} sm={12}>
-            <div className='text-center mt-3'>
+            <form onSubmit={handleUpdateQuantity} className='text-center mt-3'>
                     <h1>Quantity</h1>
                     <br />
-                    <input type="text" placeholder='Product add' />
+                    <input type="text" name='quantity' placeholder='Product add' />
                     <button>Add</button>
-                </div>
+                </form>
             </Col>
         </CardGroup>
     );

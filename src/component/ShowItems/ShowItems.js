@@ -1,7 +1,8 @@
 import React from 'react';
 
-const ShowItems = ({item}) => {
-    const {name, img, quantity} = item
+const ShowItems = (props) => {
+    const {name} = props.item
+    
     return (
         <div>
             <h2>{name}</h2>

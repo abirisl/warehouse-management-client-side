@@ -1,21 +1,22 @@
 import axios from 'axios';
 import { signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
+import { Table } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
-import useProduct from '../../Hooks/useProduct';
-import ShowItems from '../ShowItems/ShowItems';
+
 
 const MyItem = () => {
-    const [products, setProducts] = useProduct();
+    const [products, setProducts] = useState([]);
     console.log(products)
-    const [user] = useAuthState()
+    const [user] = useAuthState(auth);
 
+    
     const handleDelete = id => {
         const proceed = window.confirm('Are you sure');
         if (proceed) {
-            const url = `https://salty-reef-38421.herokuapp.com/product/${id}`;
+            const url = `http://localhost:5000/product/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })
@@ -28,39 +29,58 @@ const MyItem = () => {
 
 
         }
-    }
+    };
     const navigate = useNavigate();
 
     useEffect(() =>{
-        const email = user.email;
-
+    
         const getItem = async () =>{
-            const url = `https://salty-reef-38421.herokuapp.com/myItems?email=${email}`;
+            const email = user?.email;
+            const url = `http://localhost:5000/myItems?email=${email}`;
             try{
-                const { data } = await axios.get(url, {
+                const {data} = await axios.get(url, {
                     headers: {
-                        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+                        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
                     },
-                })
-
+                });
                 setProducts(data);
             }
             catch(error){
-                if(error.respose.status === 403 || error.respose.status === 401){
-                    signOut(auth)
-                    navigate('/login')
+                if(error.response.status ===403 || error.response.status === 401){
+                    signOut(auth);
+                    navigate("/login")
                 }
             }
-        };
+        }
         getItem()
     }, [user]);
     return (
-        <div>
-            <h1>{products.name}</h1>
-            {
-                products.map(item => <ShowItems item={item}></ShowItems>)
-            }
-        </div>
+        <Table striped bordered hover variant="dark" className='w-100'>
+        <thead>
+            <tr> 
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Image</th>
+                <th>Quantity</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+       
+        {
+            products.map(product =>
+                <tbody key={product._id}>
+                    <tr>
+                        <td>{product.name}</td>
+                        <td>{product.price}</td>
+                        <td><img style={{ height: '50px', width: '50px' }} className='ms-3' src={product.img} alt="" /></td>
+                        <td>{product.quantity}</td>
+                        <td><button className='w-100 bg-success text-white' onClick={() => handleDelete(product._id)}>Delete</button></td>
+                    </tr>
+                </tbody>
+            )
+        }
+        
+</Table>
     );
 };
 
