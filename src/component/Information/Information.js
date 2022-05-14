@@ -7,7 +7,7 @@ const Information = () => {
    const {id} = useParams();
     const [product, setProduct] = useState({});
     useEffect(() =>{
-        const url = `http://localhost:5000/product/${id}`;
+        const url = ` https://salty-reef-38421.herokuapp.com/product/${id}`;
         fetch(url)
         .then(res => res.json())
         .then(data => setProduct(data))
@@ -22,7 +22,7 @@ const Information = () => {
             return alert("quantity can not be less then zero")
         }
         
-        const url = `http://localhost:5000/product/${id}`;
+        const url = ` https://salty-reef-38421.herokuapp.com/product/${id}`;
         fetch(url, {
             method: 'PUT',
             body: JSON.stringify({newQuantity}),
