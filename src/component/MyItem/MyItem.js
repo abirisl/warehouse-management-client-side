@@ -1,9 +1,7 @@
 import axios from 'axios';
-import { signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import {  useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 
 
@@ -16,7 +14,7 @@ const MyItem = () => {
     const handleDelete = id => {
         const proceed = window.confirm('Are you sure');
         if (proceed) {
-            const url = ` https://salty-reef-38421.herokuapp.com/product/${id}`;
+            const url = `https://salty-reef-38421.herokuapp.com/product/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })
@@ -29,28 +27,16 @@ const MyItem = () => {
 
 
         }
-    };
-    const navigate = useNavigate();
+    }
 
     useEffect(() =>{
     
         const getItem = async () =>{
             const email = user?.email;
-            const url = ` https://salty-reef-38421.herokuapp.com/myItems?email=${email}`;
-            try{
-                const {data} = await axios.get(url, {
-                    headers: {
-                        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-                    },
-                });
-                setProducts(data);
-            }
-            catch(error){
-                if(error.response.status ===403 || error.response.status === 401){
-                    signOut(auth);
-                    navigate("/login")
-                }
-            }
+            console.log(email)
+            const url = `https://salty-reef-38421.herokuapp.com/myItems?email=${email}`;
+            const {data} = await axios.get(url);
+            setProducts(data);
         }
         getItem()
     }, [user]);

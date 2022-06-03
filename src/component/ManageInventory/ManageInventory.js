@@ -9,7 +9,7 @@ const ManageInventory = () => {
     const handleDelete = id => {
         const proceed = window.confirm('Are you sure');
         if (proceed) {
-            const url = ` https://salty-reef-38421.herokuapp.com/product/${id}`;
+            const url = `https://salty-reef-38421.herokuapp.com/product/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })

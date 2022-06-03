@@ -7,35 +7,52 @@ const Information = () => {
    const {id} = useParams();
     const [product, setProduct] = useState({});
     useEffect(() =>{
-        const url = ` https://salty-reef-38421.herokuapp.com/product/${id}`;
+        const url = `https://salty-reef-38421.herokuapp.com/product/${id}`;
         fetch(url)
         .then(res => res.json())
         .then(data => setProduct(data))
-    }, [product,id])
+    }, [])
 
-   
-    const handleDelivered = event => {
-        event.preventDefault();
-       let newQuantity = product.quantity;
-       newQuantity = parseInt(newQuantity) - 1;
-        if(newQuantity < 0){
-            return alert("quantity can not be less then zero")
+    const handleUpdateQuantity = async(event) =>{
+            event.preventDefault();
+    
+            const getQuantity = event.target.quantity.value;
+            if (getQuantity >= 1) {
+                const newQuantity = parseInt(getQuantity) + parseInt(product?.quantity);
+    
+                const url = `https://salty-reef-38421.herokuapp.com/product/${id}`;
+                const { data } = await axios.put(url, { newQuantity });
+    
+                if (data.modifiedCount === 1 || data.matchedCount === 1) {
+                   alert('Successfully added to stock')
+                }
+            };
+    
+            event.target.reset();
+    
         }
-        
-        const url = ` https://salty-reef-38421.herokuapp.com/product/${id}`;
-        fetch(url, {
-            method: 'PUT',
-            body: JSON.stringify({newQuantity}),
-            headers: {
-                'content-type': 'application/json',
-            },
-   
-        })
-        .then(res=>res.json())
-            .then(data => {
-            setProduct({...data, quantity: newQuantity });
-        })
-    };
+        const handleDelivered = event => {
+            event.preventDefault();
+           let newQuantity = product.quantity;
+           newQuantity = parseInt(newQuantity) - 1;
+            if(newQuantity < 0){
+                return alert("quantity can not be less then zero")
+            }
+            
+            const url = `https://salty-reef-38421.herokuapp.com/product/${id}`;
+            fetch(url, {
+                method: 'PUT',
+                body: JSON.stringify({newQuantity}),
+                headers: {
+                    'content-type': 'application/json',
+                },
+       
+            })
+            .then(res=>res.json())
+                .then(data => {
+                setProduct({...data, quantity: newQuantity });
+            })
+        };
 
     return (
         <CardGroup  className='p-5 shadow-lg rounded-lg mt-3 m-5 bg-light'>

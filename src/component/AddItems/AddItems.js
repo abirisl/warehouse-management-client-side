@@ -11,7 +11,7 @@ const AddItems = () => {
     
      const onSubmit = (data) => {
         
-        const url = ` https://salty-reef-38421.herokuapp.com/additems`;
+        const url = `https://salty-reef-38421.herokuapp.com/additems`;
         fetch(url, {
             method: 'POST',
             body: JSON.stringify(data),

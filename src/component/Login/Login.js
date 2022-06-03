@@ -60,7 +60,7 @@ const Login = () => {
             setError('Please create an register')
         }
         signInWithEmailAndPassword(email,password)
-        fetch(' https://salty-reef-38421.herokuapp.com/login', {
+        fetch('https://salty-reef-38421.herokuapp.com/login', {
             method: 'POST',
             body: JSON.stringify({
                 email: user?.email

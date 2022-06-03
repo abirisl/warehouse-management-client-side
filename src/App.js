@@ -12,7 +12,6 @@ import AddItems from './component/AddItems/AddItems';
 import ManageInventory from './component/ManageInventory/ManageInventory';
 import MyItem from './component/MyItem/MyItem';
 import RequireAuth from './component/RequireAuth/RequireAuth';
-import ShowItems from './component/ShowItems/ShowItems';
 
 function App() {
   return (
